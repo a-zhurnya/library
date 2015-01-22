@@ -253,3 +253,32 @@ function arrayChangeKey($key,$new_key,&$arr,$rewrite=true){
     }
     return false;
 }
+
+
+/**
+ * Конвертирует переносы строк в windows-понятные
+ *
+ * @param string $string
+ * @return string
+ */
+function normalizeLine($string) {
+    // Replace all the CRLF ending-lines by something uncommon
+    $DontReplaceThisString = "\r\n";
+    $specialString = "!£#!Dont_wanna_replace_that!#£!";
+    $string = str_replace($DontReplaceThisString, $specialString, $string);
+
+    // Convert the CR ending-lines into CRLF ones
+    $string = str_replace("\r", "\r\n", $string);
+
+    // Replace all the CRLF ending-lines by something uncommon
+    $string = str_replace($DontReplaceThisString, $specialString, $string);
+
+    // Convert the LF ending-lines into CRLF ones
+    $string = str_replace("\n", "\r\n", $string);
+
+    // Restore the CRLF ending-lines
+    $string = str_replace($specialString, $DontReplaceThisString, $string);
+
+    // Update the file contents
+    return $string;
+}
