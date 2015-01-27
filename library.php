@@ -1,6 +1,6 @@
 <?
 /**
- * Вариант функции strpos(), где искомое значение может быть массивом
+ * Вариант функции strpos(), где искомое значение может быть массивом любой вложенности
  *
  * @param $haystack
  * @param $needles
@@ -21,6 +21,8 @@ function strpos_array($haystack, $needles) {
     } else {
         return strpos($haystack, $needles);
     }
+
+    return false;
 }
 
 /**
