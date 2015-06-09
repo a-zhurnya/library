@@ -25,6 +25,7 @@ function strpos_array($haystack, $needles) {
     return false;
 }
 
+
 /**
  * Фильтр убирает подрят идущие символы в переданной строке
  *
@@ -48,6 +49,7 @@ function removeRepeatingSymbols($string, $symbol = " ", $count = 2) {
         return $string;
     }
 }
+
 
 /**
  * Функция подготавливает строку к адресной. Транслитерирует и убирает всё лишнее
@@ -97,6 +99,7 @@ function strToAliasUrl($string) {
     return $string;
 }
 
+
 /**
  * Функция подготавливает строку к вставке для значения в мета-тег
  * Заменяет любые кавычки на одинарные, убирает html-теги, заменяет html-сущности на норм. символы
@@ -137,6 +140,18 @@ function stringToMeta($string) {
     return $string;
 }
 
+
+/**
+ * Функция удаляет все атрибуты в html-коде
+ *
+ * @param $string
+ * @return mixed
+ */
+function removeAllAttr($string) {
+    return preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $string);
+}
+
+
 /**
  * Функция преобразует первый символ строки в верхний регистр
  *
@@ -150,6 +165,7 @@ function stringToUpperFirst($string, $encoding='UTF-8') {
         mb_substr($string, 1, mb_strlen($string), $encoding);
     return $string;
 }
+
 
 /**
  * Обрамляем абзацы текста в тег <p>
@@ -168,6 +184,7 @@ function paragraphToTag($string) {
     }
     return $res;
 }
+
 
 /**
  * Генерация кода из цифр и букв в нижнем и верхнем регистрах
@@ -189,6 +206,7 @@ function randHardCode($len) {
     return $code;
 }
 
+
 /**
  * Генерация кода из цифр и букв нижнего регистра
  *
@@ -204,6 +222,7 @@ function randEasyCode($len) {
     }
     return $code;
 }
+
 
 /**
  * Class Filter_BBCode
