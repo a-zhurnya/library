@@ -160,3 +160,42 @@ function removeClass(className) {
         );
     }
 }
+
+
+/**
+ * Ajax-загрузка файла с отслеживанием прогресса
+ *
+ * Пример входного параметра:
+ *      $("input[type=file]")[0].files[0]
+ *      document.forms.my_form.INPUT_FILE_NEME[0].files[0]
+ *
+ * @param file
+ */
+function upload(file) {
+    var xhr = new XMLHttpRequest();
+
+    // обработчик для закачки
+    xhr.upload.onprogress = function(event) {
+        console.log(event.loaded + ' / ' + event.total);
+    }
+
+    // обработчики успеха и ошибки
+    // если status == 200, то это успех, иначе ошибка
+    xhr.onload = xhr.onerror = function() {
+        if (this.status == 200) {
+            console.log("success");
+        } else {
+            console.log("error " + this.status);
+        }
+    };
+
+    /*
+     запрос будет отправлен на php-файл /upload_file.php
+     где данные по загружаемому файлу будут доступны в суперглобальном массиве $_FILES["var_name"]
+     */
+    var formData = new FormData();
+    formData.append("var_name", file);
+
+    xhr.open("POST", "/upload_file.php");
+    xhr.send(formData);
+}
