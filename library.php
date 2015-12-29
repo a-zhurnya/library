@@ -328,3 +328,24 @@ function chmod_R($path) {
     }
     closedir($handle);
 }
+
+
+/**
+ * Вывод значения переменной любого типа (str|array) в консоль браузера
+ *
+ * @param $debug_data
+ */
+function console_log($debug_data) {
+    $js = is_array($debug_data) ? json_encode($debug_data) : '"'.$debug_data.'"' ;
+    ?><script type="text/javascript">console.log(<?=$js?>)</script><?
+}
+
+
+/**
+ * print_r обёрнутая тегом pre
+ *
+ * @param $debug_data
+ */
+function p($debug_data) {
+    ?><pre><?print_r($debug_data)?></pre><?
+}
